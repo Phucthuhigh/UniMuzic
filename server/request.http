@@ -1,0 +1,18 @@
+POST http://localhost:5000/api/auth/register
+Content-Type: application/json
+
+{
+    "username": "phucthuhigh123",
+    "email": "phucthuhigh123@gmail.com",
+    "password": "phuc17012007_"
+}
+
+###
+
+POST http://localhost:5000/api/auth/login
+Content-Type: application/json
+
+{
+    "email": "phucthuhigh123@gmail.com",
+    "password": "phuc17012007_"
+}
