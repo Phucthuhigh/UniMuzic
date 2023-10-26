@@ -6,6 +6,7 @@ import mongoose from "mongoose";
 
 const router = express.Router();
 
+// @config gridFs
 const conn = mongoose.connection;
 let gfs, gridfsBucket;
 conn.once("open", () => {
@@ -17,6 +18,9 @@ conn.once("open", () => {
     gfs.collection("photos");
 });
 
+// @route POST /upload
+// @desc Upload image
+// @access public
 router.post("/upload", upload.single("photos"), (req, res) => {
     if (!req.file)
         return res
@@ -32,6 +36,9 @@ router.post("/upload", upload.single("photos"), (req, res) => {
     return res.status(200).json({ success: true, message: req.file.id });
 });
 
+// @route GET /:id
+// @desc Show the image
+// @access public
 router.get("/:id", async (req, res) => {
     console.log(req.params.id);
     try {
@@ -63,6 +70,9 @@ router.get("/:id", async (req, res) => {
     }
 });
 
+// @route DELETE /:id
+// @desc Delete the image
+// @access public
 router.delete("/:id", async (req, res) => {
     try {
         await gfs.files.deleteOne({ _id: new ObjectId(req.params.id) });
