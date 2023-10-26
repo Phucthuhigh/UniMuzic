@@ -19,6 +19,11 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:5000/api/music/song?id=ZZCFOZCW
+POST http://localhost:5000/api/auth/register
+Content-Type: application/json
 
-###
+{
+    "username": "phucthuhigh",
+    "email": "phucthuhigh123@gmail.com",
+    "password": "phuc1701_"
+}
