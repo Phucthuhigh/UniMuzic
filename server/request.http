@@ -2,9 +2,9 @@ POST http://localhost:5000/api/auth/register
 Content-Type: application/json
 
 {
-    "username": "phucthuhigh123",
-    "email": "phucthuhigh123@gmail.com",
-    "password": "phuc17012007_"
+    "username": "nguyenthao",
+    "email": "thanhhoang090497@gmail.com",
+    "password": "nguyenthao123"
 }
 
 ###
@@ -13,6 +13,12 @@ POST http://localhost:5000/api/auth/login
 Content-Type: application/json
 
 {
-    "email": "phucthuhigh123@gmail.com",
-    "password": "phuc17012007_"
+    "email": "thanhhoang090497@gmail.com",
+    "password": "nguyenthao123"
 }
+
+###
+
+GET http://localhost:5000/api/music/song?id=ZZCFOZCW
+
+###
