@@ -35,11 +35,13 @@ router.post("/:userId/upload", upload.single("avatar"), async (req, res) => {
             return res
                 .status(400)
                 .json({ success: false, message: "Not an image." });
-
+        let id = await User.findOne({ _id: new ObjectId(req.params.userId) });
+        id = id._id;
         await User.updateOne(
             { _id: new ObjectId(req.params.userId) },
             { avatar: req.file.id }
         );
+        await gfs.files.deleteOne({ _id: id });
         return res.status(200).json({ success: true, message: req.file.id });
     } catch (error) {
         return res.status(400).json({
