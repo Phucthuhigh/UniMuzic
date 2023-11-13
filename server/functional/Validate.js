@@ -13,4 +13,9 @@ const checkEmail = (email) => {
     return r.test(email);
 };
 
-export { checkName, checkPass, checkEmail };
+const checkPhone = (phoneNumber) => {
+    const r = /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/;
+    return r.test(phoneNumber);
+};
+
+export { checkName, checkPass, checkEmail, checkPhone };

@@ -21,7 +21,7 @@ conn.once("open", () => {
 // @route POST /upload
 // @desc Upload image
 // @access public
-router.post("/upload", upload.single("photos"), (req, res) => {
+router.post("/upload", upload.single("photo"), (req, res) => {
     if (!req.file)
         return res
             .status(400)
@@ -40,7 +40,6 @@ router.post("/upload", upload.single("photos"), (req, res) => {
 // @desc Show the image
 // @access public
 router.get("/:id", async (req, res) => {
-    console.log(req.params.id);
     try {
         const file = await gfs.files.findOne({
             _id: new ObjectId(req.params.id),

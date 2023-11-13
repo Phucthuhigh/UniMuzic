@@ -1,20 +1,52 @@
 import express from "express";
-import { checkEmail, checkName, checkPass } from "../functional/Validate.js";
+import {
+    checkEmail,
+    checkName,
+    checkPass,
+    checkPhone,
+} from "../functional/Validate.js";
 import User from "../models/User.js";
 import argon2 from "argon2";
 import jwt from "jsonwebtoken";
+import verifiedToken from "../middleware/veriedToken.js";
 
 const router = express.Router();
 
-// @route POST /register
+// @route POST /auth/
+// @desc Register
+// @access private
+router.get("/", verifiedToken, async (req, res) => {
+    try {
+        const user = await User.findOne({ _id: req.userId }).select(
+            "-password"
+        );
+        if (!user)
+            return res
+                .status(400)
+                .json({ success: false, message: "User not found." });
+        res.status(200).json({ success: true, user });
+    } catch (error) {
+        res.status(500).json({
+            success: true,
+            message: "Internal server error.",
+        });
+    }
+});
+
+// @route POST /auth/register
 // @desc Register
 // @access public
 router.post("/register", async (req, res) => {
-    const { username, email, password } = req.body;
+    const { username, email, password, phoneNumber } = req.body;
     if (!checkName(username) || !checkPass(password) || !checkEmail(email))
         return res.status(400).json({
             success: false,
-            message: "You have entered an invalid username or password.",
+            message: "You have entered an invalid information.",
+        });
+    if (phoneNumber && !checkPhone(phoneNumber))
+        return res.status(400).json({
+            success: false,
+            message: "You have entered an invalid information.",
         });
     try {
         const checkUsernameAlready = await User.findOne({ username });
@@ -37,6 +69,7 @@ router.post("/register", async (req, res) => {
             username,
             email,
             password: hashPassword,
+            phoneNumber,
         });
         await newUser.save();
 
@@ -61,7 +94,7 @@ router.post("/register", async (req, res) => {
     }
 });
 
-// @route POST /login
+// @route POST /auth/login
 // @desc Login
 // @access public
 router.post("/login", async (req, res) => {

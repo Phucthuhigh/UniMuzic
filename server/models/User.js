@@ -23,8 +23,10 @@ const UserSchema = new Schema({
     },
     avatar: {
         type: Schema.ObjectId,
-        default: new ObjectId("653aa8de86aecc915498a89c"),
+        default: new ObjectId("653bc4ce935189137f39a8f7"),
     },
+    favorite: [String],
+    history: [String],
     createdAt: {
         type: Date,
         default: Date.now(),

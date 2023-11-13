@@ -3,6 +3,7 @@ import authRouter from "../server/routes/auth.js";
 import zingRouter from "../server/routes/ZingRouter.js";
 import avatarRouter from "./routes/avatar.js";
 import uploadImageRouter from "./routes/uploadImage.js";
+import favoriteRoute from "./routes/favorite.js";
 import connectDB from "./models/config.js";
 import cors from "cors";
 
@@ -20,6 +21,7 @@ app.use("/api/auth", authRouter);
 app.use("/api/avatar", avatarRouter);
 app.use("/api/image", uploadImageRouter);
 app.use("/api/music", zingRouter);
+app.use("/api/favorite", favoriteRoute);
 
 const PORT = 5000;
 
