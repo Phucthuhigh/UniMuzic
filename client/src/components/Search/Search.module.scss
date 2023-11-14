@@ -5,6 +5,7 @@
     --search-top-spacer: 9px;
     --search-color: #484848;
     --search-btn-width: 52px;
+    --search-size: 1.6rem;
 
     position: relative;
     background: var(--background-search);
@@ -43,7 +44,7 @@
 .clear-btn {
     position: absolute;
     right: calc(var(--search-btn-width) + 16px);
-    font-size: 1.6rem;
+    font-size: var(--search-size);
     color: var(--search-color);
     &:hover {
         cursor: pointer;
@@ -53,7 +54,7 @@
 .search-btn {
     width: var(--search-btn-width);
     height: 100%;
-    font-size: 1.6rem;
+    font-size: var(--search-size);
     color: var(--search-color);
     background: var(--background-search);
     border-top-right-radius: var(--border-search);

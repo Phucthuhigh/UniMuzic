@@ -1,0 +1,64 @@
+.btn {
+    background-color: #333;
+    border-radius: 4px;
+    color: var(--white);
+    cursor: pointer;
+    font-size: 1.6rem;
+    font-weight: 600;
+    padding: 9px 20px;
+    transition: opacity 0.25s;
+    border: 3px solid transparent;
+    user-select: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    + .btn {
+        margin-left: 8px;
+    }
+    &.disabled {
+        pointer-events: none;
+        opacity: 0.5;
+    }
+}
+
+.icon + .title,
+.title + .icon {
+    margin-left: 8px;
+}
+
+.icon {
+    display: inline-flex;
+    align-items: center;
+}
+
+.text {
+    background-color: transparent;
+    opacity: 0.5;
+    &:hover {
+        opacity: 1;
+    }
+}
+
+.primary {
+    background: var(--primary);
+    &:hover {
+        opacity: 0.8;
+    }
+}
+
+.rounded {
+    border-radius: 99px;
+}
+
+.outline {
+    background: transparent;
+    color: var(--primary);
+    border-color: currentColor;
+    transition: background 0.2s, color 0.2s ease-in-out;
+    &:hover {
+        border-color: transparent;
+        background: var(--primary);
+        color: var(--white);
+        opacity: 1;
+    }
+}
