@@ -5,7 +5,6 @@ import images from "../../assets/images";
 import SearchBtn from "../Search";
 import { Link } from "react-router-dom";
 import Button from "../Button";
-import { FaSignInAlt } from "react-icons/fa";
 
 const cx = classNames.bind(styles);
 
