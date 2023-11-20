@@ -1,0 +1,25 @@
+.wrapper {
+    width: 232px;
+    min-height: 100vh;
+    background: #1c1c1c;
+    position: fixed;
+    z-index: 999;
+}
+
+.default-actions {
+    margin-bottom: 8px;
+}
+
+.non-user-actions {
+    padding: 20px 10px 24px;
+    p {
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 16px;
+        line-height: 21px;
+    }
+}
+
+.login-btn {
+    width: 100%;
+    margin-top: 16px;
+}

@@ -1,0 +1,26 @@
+.menu-item {
+    display: flex;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--white);
+    align-items: center;
+    padding: 20px 14px 20px 40px;
+    background: rgb(28, 28, 28);
+    transition: background ease-in-out 0.2s;
+    border-left: 3px solid transparent;
+    &:hover {
+        background: rgba(255, 255, 255, 0.05);
+    }
+    &.active {
+        border-color: var(--primary);
+        color: var(--primary);
+        background: rgba(255, 255, 255, 0.05);
+    }
+    &.separate {
+        border-top: 1px solid #484848;
+    }
+}
+
+.title {
+    margin-left: 14px;
+}

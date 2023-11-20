@@ -1,0 +1,35 @@
+.wrapper {
+    margin-top: 48px;
+    width: 100%;
+    padding: 20px;
+}
+.list {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    overflow-y: overlay;
+    .item {
+        min-width: 300px;
+        flex: 1;
+    }
+}
+
+.title {
+    margin: 20px 20px 20px 0;
+    font-size: 5rem;
+}
+
+.song-item-card {
+    border-radius: 3px;
+}
+
+.song-item-card:hover {
+    background-color: rgb(255, 255, 255, 0.2) !important;
+}
+
+.tabs {
+    margin-top: 40px;
+}

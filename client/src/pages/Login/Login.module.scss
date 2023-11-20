@@ -1,0 +1,84 @@
+.wrapper {
+    position: relative;
+    width: 500px;
+    min-height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.wrapper .login {
+    position: absolute;
+    width: 350px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.title {
+    font-size: 2em;
+    color: var(--white);
+}
+
+.links {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.links a {
+    color: var(--white);
+}
+
+.wrapper i {
+    position: absolute;
+    inset: 0;
+    border: 2px solid #fff;
+    transition: 0.5s;
+}
+
+.wrapper:hover i {
+    border: 2px solid var(--clr);
+    filter: drop-shadow(0 0 20px var(--clr));
+}
+
+.wrapper i:nth-child(1) {
+    border-radius: 43% 57% 74% 26% / 44% 30% 70% 56%;
+    animation: animate 6s linear infinite;
+}
+.wrapper i:nth-child(2) {
+    border-radius: 67% 33% 22% 78% / 52% 26% 74% 48%;
+    animation: animate 4s linear infinite;
+}
+.wrapper i:nth-child(3) {
+    border-radius: 25% 75% 74% 26% / 67% 50% 50% 33%;
+    animation: animate2 10s linear infinite;
+}
+
+.alert {
+    width: 100%;
+}
+
+@keyframes animate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes animate2 {
+    0% {
+        transform: rotate(360deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}

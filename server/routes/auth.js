@@ -9,6 +9,8 @@ import User from "../models/User.js";
 import argon2 from "argon2";
 import jwt from "jsonwebtoken";
 import verifiedToken from "../middleware/veriedToken.js";
+import sendVerifiedEmailToken from "../utils/sendVerifiedEmailToken.js";
+import { randomBytes } from "node:crypto";
 
 const router = express.Router();
 
@@ -37,8 +39,14 @@ router.get("/", verifiedToken, async (req, res) => {
 // @desc Register
 // @access public
 router.post("/register", async (req, res) => {
-    const { username, email, password, phoneNumber } = req.body;
-    if (!checkName(username) || !checkPass(password) || !checkEmail(email))
+    const { username, email, password, confirmPassword, phoneNumber } =
+        req.body;
+    if (
+        !checkName(username) ||
+        !checkPass(password) ||
+        !checkEmail(email) ||
+        password !== confirmPassword
+    )
         return res.status(400).json({
             success: false,
             message: "You have entered an invalid information.",
@@ -65,13 +73,17 @@ router.post("/register", async (req, res) => {
 
         // success username and password
         const hashPassword = await argon2.hash(password);
+        const emailToken = randomBytes(64).toString("hex");
         const newUser = new User({
             username,
             email,
             password: hashPassword,
+            emailToken,
             phoneNumber,
         });
         await newUser.save();
+
+        sendVerifiedEmailToken(newUser);
 
         // Valid
         // Return token
@@ -86,7 +98,7 @@ router.post("/register", async (req, res) => {
             accessToken,
         });
     } catch (error) {
-        console.log(error);
+        console.log(error.message);
         res.status(500).json({
             success: true,
             message: "Internal server error.",
@@ -135,7 +147,116 @@ router.post("/login", async (req, res) => {
             accessToken,
         });
     } catch (error) {
-        console.log(error);
+        console.log(error.message);
+        res.status(500).json({
+            success: true,
+            message: "Internal server error.",
+        });
+    }
+});
+
+// @route POST /auth/verify-email
+// @desc Verify email
+// @access private
+router.post("/verify-email", async (req, res) => {
+    try {
+        const emailToken = req.body.emailToken;
+
+        if (!emailToken)
+            return res
+                .status(400)
+                .json({ success: false, message: "Email token not found." });
+        const user = await User.findOne({ emailToken });
+        if (user) {
+            user.emailToken = null;
+            user.isVerified = true;
+
+            await user.save();
+
+            const accessToken = jwt.sign(
+                { userId: user._id },
+                process.env.ACCESS_TOKEN_SECRET
+            );
+
+            return res.status(200).json({
+                success: true,
+                message: "Verified successfully!",
+                accessToken,
+            });
+        } else {
+            res.status(400).json({
+                success: false,
+                message: "Email token invalid.",
+            });
+        }
+    } catch (error) {
+        console.log(error.message);
+        return res.status(400).json({
+            success: false,
+            message: "Email token invalid.",
+        });
+    }
+});
+
+// @route POST /auth/forgot-password
+// @desc Forgot password
+// @access private
+router.post("/forgot-password", async (req, res) => {
+    const { email } = req.body;
+    try {
+        const user = await User.findOne({ email });
+        if (!user)
+            return res.status(400).json({
+                success: false,
+                message: "User not exist.",
+            });
+        const token = jwt.sign(
+            { id: user._id },
+            process.env.ACCESS_TOKEN_SECRET,
+            {
+                expiresIn: "5m",
+            }
+        );
+        console.log(user._id);
+        const link = `${process.env.SERVER_URL}/auth/reset-password/${user._id}/${token}`;
+        console.log(link);
+        res.json({ success: true, link });
+    } catch (error) {
+        console.log(error.message);
+        res.status(500).json({
+            success: true,
+            message: "Internal server error.",
+        });
+    }
+});
+
+// @route POST /auth/reset-password/:id/:token
+// @desc Reset password
+// @access private
+router.post("/reset-password/:id/:token", async (req, res) => {
+    const { id, token } = req.params;
+    const { password } = req.body;
+    try {
+        const user = await User.findById(id);
+        if (!user)
+            return res.status(400).json({
+                success: false,
+                message: "User not exist.",
+            });
+        try {
+            const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
+            const hashPassword = await argon2.hash(password);
+            await User.findByIdAndUpdate(id, { password: hashPassword });
+            res.json({
+                success: true,
+                message: "Update password successfully.",
+            });
+        } catch (error) {
+            console.log(error.message);
+            res.status(400).json({ success: false, message: "Invalid token." });
+        }
+    } catch (error) {
+        console.log(error.message);
         res.status(500).json({
             success: true,
             message: "Internal server error.",

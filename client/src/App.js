@@ -1,7 +1,8 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import { publicRoutes } from "./routes";
-import DefaultLayout from "./components/Layouts/DefaultLayout";
+import { publicRoutes, privateRoutes } from "./routes";
+import DefaultLayout from "./Layouts/DefaultLayout";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
     return (
@@ -20,6 +21,25 @@ function App() {
                                 <Layout>
                                     <Page />
                                 </Layout>
+                            }
+                        />
+                    );
+                })}
+                {privateRoutes.map((route, index) => {
+                    let Layout = DefaultLayout;
+                    if (route.layout) Layout = route.layout;
+                    else if (route.layout === null) Layout = React.Fragment;
+                    const Page = route.component;
+                    return (
+                        <Route
+                            key={index}
+                            path={route.path}
+                            element={
+                                <ProtectedRoute>
+                                    <Layout>
+                                        <Page />
+                                    </Layout>
+                                </ProtectedRoute>
                             }
                         />
                     );

@@ -1,5 +1,5 @@
 const checkName = (username) => {
-    const r = /^[a-z][^\W_]{4,14}$/;
+    const r = /^[a-zA-Z0-9]([._-](?![._-])|[a-zA-Z0-9]){2,18}[a-zA-Z0-9]$/;
     return r.test(username);
 };
 
