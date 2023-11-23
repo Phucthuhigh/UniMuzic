@@ -10,11 +10,7 @@ const sendVerifiedEmailToken = (user) => {
         html: `
             <h1>Xin chào ${user.username} 🥳🔥</h1>
             <p>UniMuzic cảm ơn bạn đã đăng ký! Ấn vào liên kết dưới đây để xác nhận địa chỉ email của bạn:</p>
-            <a href='${
-                process.env.VERCEL_URL
-                    ? `https://${process.env.VERCEL_URL}`
-                    : process.env.CLIENT_URL
-            }/verify-email/${user.emailToken}'>Ấn vào đây để xác nhận email</a>
+            <a href='${process.env.CLIENT_URL}/verify-email/${user.emailToken}'>Ấn vào đây để xác nhận email</a>
             <p>UniMuzic mãi iu bạn 💗</p>`,
     };
     transporter.sendMail(mailConfig, (err, info) => {
