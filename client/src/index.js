@@ -5,6 +5,8 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter as Router } from "react-router-dom";
 import GlobalStyles from "./GlobalStyles";
 import { AuthContextProvider, SongContextProvider } from "./contexts";
+import { inject } from "@vercel/analytics";
+inject();
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
