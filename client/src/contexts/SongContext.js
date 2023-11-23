@@ -38,7 +38,7 @@ const SongContextProvider = ({ children }) => {
                                 ...music,
                             },
                             playlistSong: playlist,
-                            srcAudio: res.items["128"],
+                            srcAudio: res.items ? res.items["128"] : "",
                             songId: music.encodeId,
                             currentIndexPlaylist: playlist.findIndex(
                                 (item) => item.encodeId === music.encodeId

@@ -1,4 +1,65 @@
 .wrapper {
     width: 100%;
     padding: 35px;
+    display: flex;
+}
+
+.about-playlist {
+    margin-right: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .cover-image {
+        width: auto;
+        height: auto;
+        img {
+            width: 380px;
+            height: 380px;
+            object-fit: cover;
+            border-radius: 16px;
+        }
+    }
+    .info {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-top: 16px;
+        .title,
+        .last-update,
+        .artists,
+        .like {
+            margin-bottom: 6px;
+        }
+        .last-update,
+        .artists,
+        .like {
+            color: rgba(255, 255, 255, 0.5);
+        }
+        .artists {
+            & a {
+                color: currentColor;
+                &:hover {
+                    color: var(--white);
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+    .btn {
+        margin-top: 10px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        .btn-play {
+            padding-left: 50px;
+            padding-right: 50px;
+        }
+    }
+}
+
+.playlist {
+    height: 550px;
+    flex: 1;
+    overflow-y: auto;
 }

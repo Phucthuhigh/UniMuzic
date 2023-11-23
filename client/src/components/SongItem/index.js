@@ -6,6 +6,7 @@ import Badge from "../Badge";
 import { useContext } from "react";
 import { SongContext } from "../../contexts";
 import { formatTime } from "../../utils/formatTime";
+import { Link } from "react-router-dom";
 
 const cx = classNames.bind(styles);
 
@@ -26,7 +27,7 @@ function SongItem({ data, duration, playlist = [], className }) {
             />
             <div className={cx("info")}>
                 <h4 className={cx("title")}>
-                    <span>{data.title}</span>
+                    <span className={cx("title-text")}>{data.title}</span>
                     {data.streamingStatus !== 1 && (
                         <Badge
                             title="VIP"
@@ -37,7 +38,21 @@ function SongItem({ data, duration, playlist = [], className }) {
                         />
                     )}
                 </h4>
-                <span className={cx("author")}>{data.artistsNames}</span>
+                <div className={cx("author")}>
+                    {data.artists &&
+                        data.artists.map((artist, index) => {
+                            return (
+                                <div
+                                    key={artist.id}
+                                    style={{ display: "inline-block" }}>
+                                    {index === 0 ? <></> : <span>, </span>}
+                                    <Link to={`/artist/${artist.id}`}>
+                                        {artist.name}
+                                    </Link>
+                                </div>
+                            );
+                        })}
+                </div>
             </div>
             {duration && (
                 <span className={cx("duration")}>{formatTime(duration)}</span>
