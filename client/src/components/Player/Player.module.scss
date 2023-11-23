@@ -1,0 +1,101 @@
+.wrapper {
+    width: 100%;
+    height: 100px;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    z-index: 999;
+    border-top: 1px solid rgb(255, 255, 255, 0.5);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px;
+}
+
+@supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+    .wrapper {
+        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px);
+        background-color: rgba(0, 0, 0, 0.6);
+    }
+}
+
+.mid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 500px;
+}
+
+.mid-control {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2px;
+    & .item {
+        margin: 0 16px;
+    }
+}
+
+.right {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    & .item {
+        margin: 0 12px;
+    }
+}
+
+.left {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 400px;
+}
+
+.wave {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    .wave-item {
+        width: 3px;
+        height: 10px;
+        margin-right: 3px;
+        border-radius: 10px 10px 0 0;
+        background-color: var(--primary);
+        animation: unset;
+    }
+    .wave-item:nth-child(2) {
+        height: 13px;
+    }
+    .wave-item:nth-child(3) {
+        height: 8px;
+    }
+}
+
+.wave.active {
+    .wave-item {
+        animation: wave 0.5s linear infinite;
+    }
+    .wave-item:nth-child(2) {
+        animation-delay: 0.4s;
+    }
+    .wave-item:nth-child(3) {
+        animation-delay: 0.8s;
+    }
+}
+
+@keyframes wave {
+    0% {
+        height: 10px;
+    }
+    50% {
+        height: 15px;
+    }
+    100% {
+        height: 10px;
+    }
+}

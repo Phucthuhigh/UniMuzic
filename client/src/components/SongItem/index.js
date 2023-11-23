@@ -2,18 +2,19 @@ import PropTypes from "prop-types";
 import classNames from "classnames/bind";
 import Image from "../Image";
 import styles from "./SongItem.module.scss";
-import { LOCAL_STORAGE_CURRENT_MUSIC } from "../../utils/constants";
 import Badge from "../Badge";
 import { useContext } from "react";
 import { SongContext } from "../../contexts";
+import { formatTime } from "../../utils/formatTime";
 
 const cx = classNames.bind(styles);
 
-function SongItem({ data, className }) {
+function SongItem({ data, duration, playlist = [], className }) {
     const { updateCurrentMusic } = useContext(SongContext);
 
     const handlePlayMusic = async () => {
-        if (data.streamingStatus === 1) await updateCurrentMusic(data.encodeId);
+        if (data.streamingStatus === 1)
+            await updateCurrentMusic(data, playlist);
     };
 
     return (
@@ -38,6 +39,9 @@ function SongItem({ data, className }) {
                 </h4>
                 <span className={cx("author")}>{data.artistsNames}</span>
             </div>
+            {duration && (
+                <span className={cx("duration")}>{formatTime(duration)}</span>
+            )}
         </div>
     );
 }

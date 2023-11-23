@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import styles from "./Home.module.scss";
 import classNames from "classnames/bind";
-import { Slider, Playlists } from "./components";
+import { Slider } from "./components";
 import { getHome } from "../../services/homeServices";
 import Spinner from "../../components/Spinner";
 import NewRelease from "./components/NewRelease";
+import Playlists from "../../components/Playlists";
 
 const cx = classNames.bind(styles);
 
@@ -31,12 +32,8 @@ const Home = () => {
         <div className={cx("wrapper")}>
             <Slider slides={home[0].items} />
             <NewRelease title={home[2].title} data={home[2].items} />
-            {home[1].map((item) => (
-                <Playlists
-                    key={item.title}
-                    title={item.title}
-                    list={item.items}
-                />
+            {home[1].map((item, index) => (
+                <Playlists key={index} title={item.title} list={item.items} />
             ))}
         </div>
     );

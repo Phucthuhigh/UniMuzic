@@ -9,6 +9,7 @@ import SongItem from "../../../components/SongItem";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { useDebounce } from "../../../hooks";
 import * as searchServices from "../../../services/searchServices";
+import { useNavigate } from "react-router-dom";
 
 const cx = classNames.bind(styles);
 
@@ -52,6 +53,8 @@ const SearchBtn = () => {
         if (!searchValue.startsWith(" ")) setInput(searchValue);
     };
 
+    const navigate = useNavigate();
+
     const inputRef = useRef();
     return (
         // Using a wrapper <div> tag around the reference element solves
@@ -75,6 +78,7 @@ const SearchBtn = () => {
                                             <SongItem
                                                 key={song.encodeId}
                                                 data={song}
+                                                playlist={searchResult.songs}
                                             />
                                         ))}
                             </div>
@@ -108,6 +112,10 @@ const SearchBtn = () => {
                         value={input}
                         onChange={handleChange}
                         onFocus={() => setShowResult(true)}
+                        onKeyDown={(e) => {
+                            if (e.key === "Enter")
+                                navigate(`/search?q=${input}`);
+                        }}
                     />
                     {!!input && !loading && (
                         <button
@@ -123,7 +131,10 @@ const SearchBtn = () => {
                     )}
                     <button
                         className={cx("search-btn")}
-                        onMouseDown={(e) => e.preventDefault()}>
+                        onMouseDown={(e) => {
+                            e.preventDefault();
+                            navigate(`/search?q=${input}`);
+                        }}>
                         <SearchIcon />
                     </button>
                 </div>

@@ -1,2 +1,10 @@
 export const SET_AUTH = "SET_AUTH";
 export const SET_SONG = "SET_SONG";
+export const SET_ISPLAY = "SET_ISPLAY";
+export const SET_ISMUTE = "SET_ISMUTE";
+export const SET_ISREPEAT = "SET_ISREPEAT";
+export const SET_VOLUME = "SET_VOLUME";
+export const SET_DURATION = "SET_DURATION";
+export const SET_CURRENTTIME = "SET_CURRENTTIME";
+export const SET_CURRENTINDEXPLAYLIST = "SET_CURRENTINDEXPLAYLIST";
+export const SET_SONGID = "SET_SONGID";

@@ -10,6 +10,7 @@ const routes = {
     dashboard: "/dashboard",
     logout: "/logout",
     verifyEmail: "/verify-email/:token",
+    detailPlaylist: "/playlist/:id",
 };
 
 export default routes;

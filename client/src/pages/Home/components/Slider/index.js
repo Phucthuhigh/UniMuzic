@@ -39,7 +39,7 @@ const swipePower = (offset, velocity) => {
 const Slider = ({ slides }) => {
     const [[page, direction], setPage] = useState([0, 0]);
 
-    const imageIndex = wrap(0, slides.length, page);
+    const imageIndex = wrap(0, slides ? slides.length : 0, page);
 
     const paginate = (newDirection) => {
         setPage([page + newDirection, newDirection]);
@@ -56,7 +56,7 @@ const Slider = ({ slides }) => {
     return (
         <div className={cx("wrapper")}>
             <div className={cx("slider")}>
-                <Link to={slides[imageIndex].link}>
+                <Link to={`/plalist/${slides[imageIndex].encodeId}`}>
                     <AnimatePresence initial={false} custom={direction}>
                         <motion.img
                             key={page}

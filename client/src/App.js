@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import { publicRoutes, privateRoutes } from "./routes";
 import DefaultLayout from "./Layouts/DefaultLayout";
 import ProtectedRoute from "./components/ProtectedRoute";
+import Player from "./components/Player";
 
 function App() {
     return (
@@ -45,6 +46,7 @@ function App() {
                     );
                 })}
             </Routes>
+            <Player />
         </div>
     );
 }

@@ -7,11 +7,11 @@ import { Link } from "react-router-dom";
 
 const cx = classNames.bind(styles);
 
-const PlaylistCard = ({ title, sortDescription, thumbnailM, link }) => {
+const PlaylistCard = ({ title, sortDescription, thumbnailM, encodeId }) => {
     return (
         <div className={cx("wrapper")}>
             <div className={cx("image")}>
-                <Link to={link}>
+                <Link to={`/playlist/${encodeId}`}>
                     <div className={cx("play-actions")}>
                         <div className={cx("follow")}>
                             <MdFavoriteBorder />
@@ -24,7 +24,7 @@ const PlaylistCard = ({ title, sortDescription, thumbnailM, link }) => {
                 </Link>
             </div>
             <div className={cx("content")}>
-                <Link to={link}>
+                <Link to={`/playlist/${encodeId}`}>
                     <h4 className={cx("title")}>{title}</h4>
                 </Link>
                 <p className={cx("description")}>{sortDescription}</p>

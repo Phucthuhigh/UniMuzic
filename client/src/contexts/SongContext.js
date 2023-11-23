@@ -1,5 +1,5 @@
 import React, { createContext, useReducer, useEffect } from "react";
-import songReducer from "../reducers/songReducer";
+import { songReducer } from "../reducers";
 import { LOCAL_STORAGE_CURRENT_MUSIC } from "../utils/constants";
 import { getSong } from "../services/getSongServices";
 import { SET_SONG } from "../reducers/constants";
@@ -8,27 +8,54 @@ export const SongContext = createContext();
 
 const SongContextProvider = ({ children }) => {
     const [songState, dispatch] = useReducer(songReducer, {
-        songLoading: true,
-        currentSong: null,
+        isPlay: false,
+        isMute: false,
+        songId: null,
+        currentIndexPlaylist: 0,
+        infoSongPlayer: null,
+        srcAudio: "",
+        currentTime: 0,
+        duration: 0,
+        volume: Number(localStorage.getItem("volume")) || 0.5,
+        isRepeat: false,
+        autoPlay: false,
+        playlistSong: [],
+        isLyric: false,
     });
 
     const loadSong = async () => {
         if (localStorage[LOCAL_STORAGE_CURRENT_MUSIC]) {
-            const res = await getSong(
+            const { music, playlist } = JSON.parse(
                 localStorage[LOCAL_STORAGE_CURRENT_MUSIC]
             );
-            if (res.success) {
-                dispatch({
-                    type: SET_SONG,
-                    payload: { currentSong: res.items },
-                });
+            if (music && playlist) {
+                const res = await getSong(music.encodeId);
+                if (res.success) {
+                    dispatch({
+                        type: SET_SONG,
+                        payload: {
+                            infoSongPlayer: {
+                                ...music,
+                            },
+                            playlistSong: playlist,
+                            srcAudio: res.items["128"],
+                            songId: music.encodeId,
+                            currentIndexPlaylist: playlist.findIndex(
+                                (item) => item.encodeId === music.encodeId
+                            ),
+                        },
+                    });
+                }
             }
         }
     };
 
-    const updateCurrentMusic = async (id) => {
+    const updateCurrentMusic = async (music, playlist) => {
         try {
-            localStorage.setItem(LOCAL_STORAGE_CURRENT_MUSIC, id);
+            localStorage.setItem(
+                LOCAL_STORAGE_CURRENT_MUSIC,
+                JSON.stringify({ music, playlist })
+            );
             await loadSong();
         } catch (error) {
             console.log(error.message);
@@ -40,7 +67,8 @@ const SongContextProvider = ({ children }) => {
     }, []);
 
     return (
-        <SongContext.Provider value={{ songState, updateCurrentMusic }}>
+        <SongContext.Provider
+            value={{ songState, dispatch, updateCurrentMusic }}>
             {children}
         </SongContext.Provider>
     );

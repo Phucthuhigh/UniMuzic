@@ -11,6 +11,7 @@ import config from "../config";
 import Dashboard from "../pages/Dashboard";
 import Logout from "../pages/Logout";
 import VerifyEmail from "../pages/VerifyEmail";
+import DetailPlaylist from "../pages/DetailPlaylist";
 
 const publicRoutes = [
     {
@@ -57,6 +58,10 @@ const publicRoutes = [
         path: config.routes.verifyEmail,
         component: VerifyEmail,
         layout: HeaderOnly,
+    },
+    {
+        path: config.routes.detailPlaylist,
+        component: DetailPlaylist,
     },
 ];
 const privateRoutes = [

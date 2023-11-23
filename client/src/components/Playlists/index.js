@@ -1,5 +1,5 @@
 import React from "react";
-import PlaylistCard from "../../../../components/PlaylistCard";
+import PlaylistCard from "../PlaylistCard";
 import classNames from "classnames/bind";
 import styles from "./Playlists.module.scss";
 
