@@ -57,7 +57,7 @@ const Login = () => {
         }
     };
     useEffect(() => {
-        const id = setTimeout(() => setAlert(null), 5000);
+        const id = setTimeout(() => setAlert(null), 6000);
         return () => {
             clearTimeout(id);
         };

@@ -20,11 +20,10 @@ function AccountItem({ data }) {
                 <h4 className={cx("name")}>
                     <span>{data.name}</span>
                 </h4>
-                {data.totalFollow && (
-                    <span className={cx("follow")}>
-                        {formatNumber(data.totalFollow)} Follows
-                    </span>
-                )}
+                <span className={cx("follow")}>
+                    {data.totalFollow ? formatNumber(data.totalFollow) : 0}{" "}
+                    Follows
+                </span>
             </div>
         </Link>
     );

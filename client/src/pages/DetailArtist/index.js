@@ -80,44 +80,55 @@ const DetailArtist = () => {
                 </div>
             </div>
             <div className={cx("content")}>
-                <div className={cx("special-song")}>
-                    <h1 className={cx("title")}>Bài hát nổi bật</h1>
-                    <div className={cx("special-song-wrapper")}>
-                        {detailArtist.sections
-                            .find((item) => item.sectionType === "song")
-                            .items.map((item) => (
-                                <SongItem
-                                    className={cx("item")}
-                                    data={item}
-                                    key={item.encodeId}
-                                />
-                            ))}
+                {detailArtist.sections.find(
+                    (item) => item.sectionType === "song"
+                ) && (
+                    <div className={cx("special-song")}>
+                        <h1 className={cx("title")}>Bài hát nổi bật</h1>
+                        <div className={cx("special-song-wrapper")}>
+                            {detailArtist.sections
+                                .find((item) => item.sectionType === "song")
+                                .items.map((item) => (
+                                    <SongItem
+                                        className={cx("item")}
+                                        data={item}
+                                        key={item.encodeId}
+                                    />
+                                ))}
+                        </div>
                     </div>
-                </div>
-                {detailArtist.sections
-                    .filter((item) => item.sectionType === "playlist")
-                    .map((item, index) => (
-                        <Playlists
-                            key={index}
-                            list={item.items}
-                            title={item.title}
-                        />
-                    ))}
-                <div className={cx("more-artist")}>
-                    <h1 className={cx("title")}>Có thể bạn quan tâm</h1>
-                    <div className={cx("list")}>
-                        {detailArtist.sections
-                            .find((item) => item.sectionType === "artist")
-                            .items.slice(0, 5)
-                            .map((item) => (
-                                <AccountCard
-                                    key={item.id}
-                                    className={cx("item")}
-                                    data={item}
-                                />
-                            ))}
+                )}
+                {detailArtist.sections.filter(
+                    (item) => item.sectionType === "playlist"
+                ) &&
+                    detailArtist.sections
+                        .filter((item) => item.sectionType === "playlist")
+                        .map((item, index) => (
+                            <Playlists
+                                key={index}
+                                list={item.items}
+                                title={item.title}
+                            />
+                        ))}
+                {detailArtist.sections.find(
+                    (item) => item.sectionType === "artist"
+                ) && (
+                    <div className={cx("more-artist")}>
+                        <h1 className={cx("title")}>Có thể bạn quan tâm</h1>
+                        <div className={cx("list")}>
+                            {detailArtist.sections
+                                .find((item) => item.sectionType === "artist")
+                                .items.slice(0, 5)
+                                .map((item) => (
+                                    <AccountCard
+                                        key={item.id}
+                                        className={cx("item")}
+                                        data={item}
+                                    />
+                                ))}
+                        </div>
                     </div>
-                </div>
+                )}
             </div>
         </div>
     );

@@ -1,0 +1,58 @@
+.wrapper {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #fff;
+    z-index: 9999;
+    transform: translateY(100%);
+    transition: transform 0.8s ease-in-out;
+    display: flex;
+    justify-content: center;
+    &.active {
+        transform: translateY(0);
+    }
+}
+
+@supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+    .wrapper {
+        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(50px);
+        background-color: rgba(0, 0, 0, 0.6);
+    }
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+}
+
+.image-song {
+    width: 500px;
+    height: 500px;
+    border-radius: 8px;
+    margin-right: 100px;
+}
+
+.lyrics {
+    width: 800px;
+    height: 500px;
+    overflow-y: auto;
+}
+
+.line {
+    margin-bottom: 12px;
+    .line-text {
+        font-size: 4rem;
+        font-weight: 700;
+        color: rgb(255, 255, 255, 0.5);
+        transition: all 0.5s ease;
+        &.active {
+            font-size: 4.2rem;
+            color: var(--white);
+        }
+    }
+}

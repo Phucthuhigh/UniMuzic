@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { wrap } from "popmotion";
 import styles from "./Slider.module.scss";
@@ -7,6 +7,8 @@ import classNames from "classnames/bind";
 import { GrLinkPrevious, GrLinkNext } from "react-icons/gr";
 import { Link } from "react-router-dom";
 import PropStyles from "prop-types";
+import { getSong } from "../../../../services/getSongServices";
+import { SongContext } from "../../../../contexts";
 
 const cx = classNames.bind(styles);
 
@@ -37,6 +39,8 @@ const swipePower = (offset, velocity) => {
 };
 
 const Slider = ({ slides }) => {
+    const { updateCurrentMusic } = useContext(SongContext);
+
     const [[page, direction], setPage] = useState([0, 0]);
 
     const imageIndex = wrap(0, slides ? slides.length : 0, page);
@@ -53,10 +57,30 @@ const Slider = ({ slides }) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [page, direction]);
 
+    const handlePlayMusic = async () => {
+        const data = await getSong(slides[imageIndex].encodeId);
+        if (data.infoSong.streamingStatus === 1) {
+            await updateCurrentMusic(data.infoSong, [data.infoSong]);
+        }
+    };
+
+    let Comp;
+    const props = { style: { cursor: "pointer" } };
+    // Bài hát
+    if (slides[imageIndex].type === 1) {
+        Comp = "div";
+        props.onClick = handlePlayMusic;
+    }
+    // Playlist
+    else {
+        Comp = Link;
+        props.to = `/playlist/${slides[imageIndex].encodeId}`;
+    }
+
     return (
         <div className={cx("wrapper")}>
             <div className={cx("slider")}>
-                <Link to={`/playlist/${slides[imageIndex].encodeId}`}>
+                <Comp {...props}>
                     <AnimatePresence initial={false} custom={direction}>
                         <motion.img
                             key={page}
@@ -88,7 +112,7 @@ const Slider = ({ slides }) => {
                             }}
                         />
                     </AnimatePresence>
-                </Link>
+                </Comp>
                 <div className={cx("buttons")}>
                     <div className={cx("prev")} onClick={() => paginate(-1)}>
                         <GrLinkPrevious />

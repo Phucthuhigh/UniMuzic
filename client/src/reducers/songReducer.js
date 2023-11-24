@@ -8,6 +8,7 @@ import {
     SET_ISREPEAT,
     SET_CURRENTINDEXPLAYLIST,
     SET_SONGID,
+    SET_ISLYRIC,
 } from "./constants";
 
 const songReducer = (state, action) => {
@@ -57,6 +58,11 @@ const songReducer = (state, action) => {
             return {
                 ...state,
                 songId: payload,
+            };
+        case SET_ISLYRIC:
+            return {
+                ...state,
+                isLyric: payload,
             };
         default:
             throw new Error("Action invalid");
