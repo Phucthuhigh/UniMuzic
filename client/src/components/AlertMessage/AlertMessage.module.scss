@@ -65,7 +65,7 @@
     border-left: 4px solid;
     box-shadow: 0 5px 8px rgba(0, 0, 0, 0.08);
     transition: all linear 0.3s;
-    animation: slideInLeft ease 0.3s, fadeOut linear 1s 10s forwards;
+    animation: slideInLeft ease 0.3s, fadeOut linear 1s 5s forwards;
 }
 
 @keyframes slideInLeft {
