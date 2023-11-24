@@ -2,14 +2,13 @@ import classNames from "classnames/bind";
 import styles from "./Signup.module.scss";
 import Input from "../../components/Input";
 import { Link, Navigate } from "react-router-dom";
-import { useContext, useState, useEffect, useRef } from "react";
+import { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../../contexts";
 import Spinner from "../../components/Spinner";
 import config from "../../config";
 import AlertMessage from "../../components/AlertMessage";
 import { FaCheckCircle } from "react-icons/fa";
 import { BsExclamationCircleFill } from "react-icons/bs";
-import autoAnimate from "@formkit/auto-animate";
 
 const cx = classNames.bind(styles);
 
@@ -28,7 +27,6 @@ const Signup = () => {
     });
 
     const [alert, setAlert] = useState(null);
-    const parent = useRef(null);
 
     const { username, email, phoneNumber, password, confirmPassword } =
         loginForm;
@@ -72,8 +70,6 @@ const Signup = () => {
         setAlert(null);
     };
 
-    parent.current && autoAnimate(parent.current);
-
     return (
         <div className={cx("wrapper")}>
             {authLoading ? (
@@ -85,7 +81,7 @@ const Signup = () => {
                     <i style={{ "--clr": "#fffd44" }}></i>
                     <i style={{ "--clr": "#f43f5e" }}></i>
                     <i style={{ "--clr": "#9333ea" }}></i>
-                    <form className={cx("signup")} ref={parent}>
+                    <form className={cx("signup")}>
                         <h2 className={cx("title")}>Đăng ký</h2>
                         {alert && (
                             <AlertMessage

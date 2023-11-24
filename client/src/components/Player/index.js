@@ -12,6 +12,7 @@ import {
     VolumeControl,
 } from "./components/Control";
 import { SET_CURRENTINDEXPLAYLIST, SET_SONGID } from "../../reducers/constants";
+import { BsExclamationCircleFill } from "react-icons/bs";
 
 import Progress from "./components/Progress";
 import {
@@ -19,6 +20,7 @@ import {
     SET_DURATION,
     SET_ISPLAY,
 } from "../../reducers/constants";
+import AlertMessage from "../AlertMessage";
 
 const cx = classNames.bind(styles);
 
@@ -36,6 +38,7 @@ const Player = () => {
             playlistSong,
             currentIndexPlaylist,
             isFailed,
+            messageFailed,
         },
         dispatch,
         updateCurrentMusic,
@@ -43,8 +46,15 @@ const Player = () => {
 
     const auRef = useRef(null);
 
-    return !infoSongPlayer || isFailed ? (
+    return !infoSongPlayer ? (
         <></>
+    ) : isFailed ? (
+        <AlertMessage
+            type="error"
+            title="Thất bại"
+            message={messageFailed}
+            icon={<BsExclamationCircleFill />}
+        />
     ) : (
         <div className={cx("wrapper")}>
             <div className={cx("left")}>

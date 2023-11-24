@@ -1,5 +1,5 @@
 import classNames from "classnames/bind";
-import React, { useContext, useRef, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import styles from "./Login.module.scss";
 import Input from "../../components/Input";
 import { Link } from "react-router-dom";
@@ -10,7 +10,6 @@ import config from "../../config";
 import AlertMessage from "../../components/AlertMessage";
 import { FaCheckCircle } from "react-icons/fa";
 import { BsExclamationCircleFill } from "react-icons/bs";
-import autoAnimate from "@formkit/auto-animate";
 
 const cx = classNames.bind(styles);
 
@@ -26,7 +25,6 @@ const Login = () => {
     });
 
     const [alert, setAlert] = useState(null);
-    const parent = useRef(null);
 
     const { email, password } = loginForm;
 
@@ -69,8 +67,6 @@ const Login = () => {
         setAlert(null);
     };
 
-    parent.current && autoAnimate(parent.current);
-
     return (
         <div className={cx("wrapper")}>
             {authLoading ? (
@@ -82,10 +78,7 @@ const Login = () => {
                     <i style={{ "--clr": "#fffd44" }}></i>
                     <i style={{ "--clr": "#f43f5e" }}></i>
                     <i style={{ "--clr": "#9333ea" }}></i>
-                    <form
-                        className={cx("login")}
-                        onSubmit={handleSubmitLogin}
-                        ref={parent}>
+                    <form className={cx("login")} onSubmit={handleSubmitLogin}>
                         <h2 className={cx("title")}>Đăng nhập</h2>
                         {alert && (
                             <AlertMessage
