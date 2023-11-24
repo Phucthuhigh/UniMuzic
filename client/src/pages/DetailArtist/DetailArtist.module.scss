@@ -1,0 +1,93 @@
+.wrapper {
+    min-height: 1000px;
+    width: 1265px;
+}
+.artist-banner {
+    width: 100%;
+    height: 350px;
+    position: relative;
+    background-position: 50% 50%;
+    &::before {
+        content: "";
+        bottom: 0;
+        position: absolute;
+        width: 100%;
+        height: 200px;
+        background-image: linear-gradient(0deg, rgb(0, 0, 0, 0.8), transparent);
+    }
+}
+
+.artist-item {
+    position: absolute;
+    width: max-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    bottom: 30px;
+    left: 50px;
+    .avatar {
+        width: 140px;
+        height: 140px;
+        margin-right: 32px;
+        border-radius: 50%;
+    }
+}
+
+.top {
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    .name {
+        font-size: 6rem;
+        margin-right: 20px;
+    }
+    .btn-play {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: var(--white);
+        color: var(--primary);
+        font-size: 2rem;
+        cursor: pointer;
+    }
+}
+
+.content {
+    // width: 100%;
+    padding: 35px;
+}
+
+.special-song-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    width: 100%;
+    height: 230px;
+    border-radius: 8px;
+    overflow-y: overlay;
+    margin-bottom: 48px;
+    .item {
+        min-width: 300px;
+        flex: 1;
+        border-radius: 3px;
+    }
+    .item:hover {
+        background-color: rgb(255, 255, 255, 0.2) !important;
+    }
+}
+
+.title {
+    margin: 20px;
+    font-size: 5rem;
+}
+
+.more-artist {
+    margin-bottom: 48px;
+    & .list {
+        display: flex;
+        margin-top: 20px;
+    }
+}

@@ -16,7 +16,7 @@ const SongContextProvider = ({ children }) => {
         srcAudio: "",
         currentTime: 0,
         duration: 0,
-        volume: Number(localStorage.getItem("volume")) || 0.5,
+        volume: JSON.parse(localStorage.getItem("volume")) ?? 0.5,
         isRepeat: false,
         autoPlay: false,
         playlistSong: [],

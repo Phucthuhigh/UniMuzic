@@ -44,8 +44,7 @@ const DetailPlaylist = () => {
             setLoading(false);
         };
         fetchApi();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [id]);
 
     return loading || !detailPlaylist ? (
         <Spinner />

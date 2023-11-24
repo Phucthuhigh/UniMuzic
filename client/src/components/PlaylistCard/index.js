@@ -11,17 +11,20 @@ const PlaylistCard = ({ title, sortDescription, thumbnailM, encodeId }) => {
     return (
         <div className={cx("wrapper")}>
             <div className={cx("image")}>
-                <Link to={`/playlist/${encodeId}`}>
-                    <div className={cx("play-actions")}>
-                        <div className={cx("follow")}>
-                            <MdFavoriteBorder />
-                        </div>
+                <div className={cx("play-actions")}>
+                    <Link to={`/playlist/${encodeId}`}>
+                        <div className={cx("overlay")}></div>
+                    </Link>
+                    <div className={cx("follow")}>
+                        <MdFavoriteBorder />
+                    </div>
+                    <Link to={`/playlist/${encodeId}`}>
                         <div className={cx("play")}>
                             <IoPlayCircleOutline />
                         </div>
-                    </div>
-                    <img className={cx("thumb")} src={thumbnailM} alt={title} />
-                </Link>
+                    </Link>
+                </div>
+                <img className={cx("thumb")} src={thumbnailM} alt={title} />
             </div>
             <div className={cx("content")}>
                 <Link to={`/playlist/${encodeId}`}>

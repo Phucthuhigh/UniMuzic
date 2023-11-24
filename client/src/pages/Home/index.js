@@ -30,8 +30,8 @@ const Home = () => {
         <Spinner />
     ) : (
         <div className={cx("wrapper")}>
-            <Slider slides={home[0].items} />
-            <NewRelease title={home[2].title} data={home[2].items} />
+            <Slider slides={home[0][0].items} />
+            <NewRelease title={home[2][0].title} data={home[2][0].items} />
             {home[1].map((item, index) => (
                 <Playlists key={index} title={item.title} list={item.items} />
             ))}

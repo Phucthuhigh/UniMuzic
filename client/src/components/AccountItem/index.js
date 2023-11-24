@@ -9,8 +9,6 @@ import { formatNumber } from "../../utils/formatNumber";
 const cx = classNames.bind(styles);
 
 function AccountItem({ data }) {
-    console.log(data);
-
     return (
         <Link to={`/artist/${data.alias}`} className={cx("wrapper")}>
             <Image
@@ -22,9 +20,11 @@ function AccountItem({ data }) {
                 <h4 className={cx("name")}>
                     <span>{data.name}</span>
                 </h4>
-                <span className={cx("username")}>
-                    {formatNumber(data.totalFollow)} Follows
-                </span>
+                {data.totalFollow && (
+                    <span className={cx("follow")}>
+                        {formatNumber(data.totalFollow)} Follows
+                    </span>
+                )}
             </div>
         </Link>
     );

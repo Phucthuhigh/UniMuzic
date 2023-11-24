@@ -30,7 +30,7 @@ const NewRelease = ({ title, data }) => {
                 ))}
             </div>
             <div className={cx("list")}>
-                {data[type].slice(0, 12).map((item) => (
+                {data[type].map((item) => (
                     <div className={cx("item")} key={item.encodeId}>
                         <SongItem
                             className={cx("song-item-card")}

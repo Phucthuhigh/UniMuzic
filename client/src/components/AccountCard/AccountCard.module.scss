@@ -1,0 +1,29 @@
+.wrapper {
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.avatar {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+}
+
+.info {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    .name {
+        color: var(--white);
+        margin-bottom: 4px;
+        &:hover {
+            color: var(--primary);
+            text-decoration: underline;
+        }
+    }
+}

@@ -19,14 +19,15 @@ function SongItem({ data, duration, playlist = [], className }) {
     };
 
     return (
-        <div className={cx("wrapper", className)} onClick={handlePlayMusic}>
+        <div className={cx("wrapper", className)}>
             <Image
                 className={cx("thumb")}
                 src={data.thumbnailM}
                 alt={data.thumbnailM}
+                onClick={handlePlayMusic}
             />
             <div className={cx("info")}>
-                <h4 className={cx("title")}>
+                <h4 className={cx("title")} onClick={handlePlayMusic}>
                     <span className={cx("title-text")}>{data.title}</span>
                     {data.streamingStatus !== 1 && (
                         <Badge
