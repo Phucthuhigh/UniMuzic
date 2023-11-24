@@ -12,6 +12,7 @@ import Dashboard from "../pages/Dashboard";
 import Logout from "../pages/Logout";
 import VerifyEmail from "../pages/VerifyEmail";
 import DetailPlaylist from "../pages/DetailPlaylist";
+import DetailArtist from "../pages/DetailArtist";
 
 const publicRoutes = [
     {
@@ -62,6 +63,10 @@ const publicRoutes = [
     {
         path: config.routes.detailPlaylist,
         component: DetailPlaylist,
+    },
+    {
+        path: config.routes.detailArtist,
+        component: DetailArtist,
     },
 ];
 const privateRoutes = [

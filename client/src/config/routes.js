@@ -11,6 +11,7 @@ const routes = {
     logout: "/logout",
     verifyEmail: "/verify-email/:token",
     detailPlaylist: "/playlist/:id",
+    detailArtist: "/artist/:name",
 };
 
 export default routes;

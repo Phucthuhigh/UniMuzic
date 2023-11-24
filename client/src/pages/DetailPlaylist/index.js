@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import SongItem from "../../components/SongItem";
 import Button from "../../components/Button";
 import { SongContext } from "../../contexts";
+import { formatNumber } from "../../utils/formatNumber";
 
 const cx = classNames.bind(styles);
 
@@ -73,7 +74,7 @@ const DetailPlaylist = () => {
                                         key={artist.id}
                                         style={{ display: "inline-block" }}>
                                         {index === 0 ? <></> : <span>, </span>}
-                                        <Link to={`/artist/${artist.id}`}>
+                                        <Link to={`/artist/${artist.alias}`}>
                                             {artist.name}
                                         </Link>
                                     </div>
@@ -81,7 +82,7 @@ const DetailPlaylist = () => {
                             })}
                     </div>
                     <span className={cx("like")}>
-                        {detailPlaylist.like} người yêu thích
+                        {formatNumber(detailPlaylist.like)} người yêu thích
                     </span>
                 </div>
 

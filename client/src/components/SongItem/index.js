@@ -46,7 +46,7 @@ function SongItem({ data, duration, playlist = [], className }) {
                                     key={artist.id}
                                     style={{ display: "inline-block" }}>
                                     {index === 0 ? <></> : <span>, </span>}
-                                    <Link to={`/artist/${artist.id}`}>
+                                    <Link to={`/artist/${artist.alias}`}>
                                         {artist.name}
                                     </Link>
                                 </div>

@@ -35,6 +35,7 @@ const Player = () => {
             isRepeat,
             playlistSong,
             currentIndexPlaylist,
+            isFailed,
         },
         dispatch,
         updateCurrentMusic,
@@ -42,7 +43,7 @@ const Player = () => {
 
     const auRef = useRef(null);
 
-    return !infoSongPlayer ? (
+    return !infoSongPlayer || isFailed ? (
         <></>
     ) : (
         <div className={cx("wrapper")}>

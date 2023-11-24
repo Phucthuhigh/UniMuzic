@@ -21,28 +21,38 @@ const SongContextProvider = ({ children }) => {
         autoPlay: false,
         playlistSong: [],
         isLyric: false,
+        isFailed: false,
+        messageFailed: "",
     });
 
     const loadSong = async () => {
         if (localStorage[LOCAL_STORAGE_CURRENT_MUSIC]) {
-            const { music, playlist } = JSON.parse(
+            const { musicId, playlist } = JSON.parse(
                 localStorage[LOCAL_STORAGE_CURRENT_MUSIC]
             );
-            if (music && playlist) {
-                const res = await getSong(music.encodeId);
+            if (musicId && playlist) {
+                const res = await getSong(musicId);
                 if (res.success) {
                     dispatch({
                         type: SET_SONG,
                         payload: {
                             infoSongPlayer: {
-                                ...music,
+                                ...res.infoSong,
                             },
                             playlistSong: playlist,
-                            srcAudio: res.items ? res.items["128"] : "",
-                            songId: music.encodeId,
+                            srcAudio: res.dataSong ? res.dataSong["128"] : "",
+                            songId: musicId,
                             currentIndexPlaylist: playlist.findIndex(
-                                (item) => item.encodeId === music.encodeId
+                                (item) => item.encodeId === musicId
                             ),
+                        },
+                    });
+                } else {
+                    dispatch({
+                        type: SET_SONG,
+                        payload: {
+                            isFailed: true,
+                            messageFailed: res.message,
                         },
                     });
                 }
@@ -54,7 +64,7 @@ const SongContextProvider = ({ children }) => {
         try {
             localStorage.setItem(
                 LOCAL_STORAGE_CURRENT_MUSIC,
-                JSON.stringify({ music, playlist })
+                JSON.stringify({ musicId: music.encodeId, playlist })
             );
             await loadSong();
         } catch (error) {

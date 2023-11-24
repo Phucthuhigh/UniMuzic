@@ -4,22 +4,27 @@ import classNames from "classnames/bind";
 import Image from "../Image";
 import styles from "./AccountItem.module.scss";
 import images from "../../assets/images";
+import { formatNumber } from "../../utils/formatNumber";
 
 const cx = classNames.bind(styles);
 
 function AccountItem({ data }) {
+    console.log(data);
+
     return (
-        <Link to={`/artist${data.link}`} className={cx("wrapper")}>
+        <Link to={`/artist/${data.alias}`} className={cx("wrapper")}>
             <Image
                 className={cx("avatar")}
-                src={data.avatar || images.noImage}
+                src={data.thumbnailM || images.noImage}
                 alt={data.name}
             />
             <div className={cx("info")}>
                 <h4 className={cx("name")}>
                     <span>{data.name}</span>
                 </h4>
-                <span className={cx("username")}>{data.follow} Follows</span>
+                <span className={cx("username")}>
+                    {formatNumber(data.totalFollow)} Follows
+                </span>
             </div>
         </Link>
     );

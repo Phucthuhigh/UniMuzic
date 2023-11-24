@@ -56,7 +56,7 @@ const Slider = ({ slides }) => {
     return (
         <div className={cx("wrapper")}>
             <div className={cx("slider")}>
-                <Link to={`/plalist/${slides[imageIndex].encodeId}`}>
+                <Link to={`/playlist/${slides[imageIndex].encodeId}`}>
                     <AnimatePresence initial={false} custom={direction}>
                         <motion.img
                             key={page}

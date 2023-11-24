@@ -32,7 +32,11 @@ const UserSchema = new Schema({
         type: Schema.ObjectId,
         default: new ObjectId("653bc4ce935189137f39a8f7"),
     },
-    favorite: [String],
+    favorite: {
+        song: [String],
+        playlist: [String],
+        artist: [String],
+    },
     history: [String],
     createdAt: {
         type: Date,

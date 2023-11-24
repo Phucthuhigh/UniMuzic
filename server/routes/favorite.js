@@ -4,10 +4,27 @@ import User from "../models/User.js";
 
 const router = express.Router();
 
-router.post("/:musicId", verifiedToken, async (req, res) => {
+router.post("/", verifiedToken, async (req, res) => {
     try {
+        const { type, id } = req.body;
         let user = await User.findById(req.userId);
-        const userFavorite = user.favorite.find(
+        let userFavorite = user.favorite.song.find(
+            (element) => element == req.params.musicId
+        );
+        if (userFavorite)
+            return res.status(400).json({
+                success: false,
+                message: "This song has already in list.",
+            });
+        userFavorite = user.favorite.playlist.find(
+            (element) => element == req.params.musicId
+        );
+        if (userFavorite)
+            return res.status(400).json({
+                success: false,
+                message: "This song has already in list.",
+            });
+        userFavorite = user.favorite.artist.find(
             (element) => element == req.params.musicId
         );
         if (userFavorite)
@@ -16,7 +33,7 @@ router.post("/:musicId", verifiedToken, async (req, res) => {
                 message: "This song has already in list.",
             });
         await User.findByIdAndUpdate(req.userId, {
-            $push: { favorite: req.params.musicId },
+            $push: { favorite: { [type]: id } },
         });
         user = await User.findById(req.userId);
         return res.json({ success: true, user });

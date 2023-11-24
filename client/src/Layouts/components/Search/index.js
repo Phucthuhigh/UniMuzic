@@ -90,12 +90,7 @@ const SearchBtn = () => {
                                         .map((artist) => (
                                             <AccountItem
                                                 key={artist.id}
-                                                data={{
-                                                    name: artist.name,
-                                                    link: artist.link,
-                                                    follow: artist.totalFollow,
-                                                    avatar: artist.thumbnailM,
-                                                }}
+                                                data={artist}
                                             />
                                         ))}
                             </div>
