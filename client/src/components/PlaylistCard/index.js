@@ -7,32 +7,38 @@ import { Link } from "react-router-dom";
 
 const cx = classNames.bind(styles);
 
-const PlaylistCard = ({ title, sortDescription, thumbnailM, encodeId }) => {
+const PlaylistCard = ({ data }) => {
     return (
-        <div className={cx("wrapper")}>
-            <div className={cx("image")}>
-                <div className={cx("play-actions")}>
-                    <Link to={`/playlist/${encodeId}`}>
-                        <div className={cx("overlay")}></div>
-                    </Link>
-                    <div className={cx("follow")}>
-                        <MdFavoriteBorder />
-                    </div>
-                    <Link to={`/playlist/${encodeId}`}>
-                        <div className={cx("play")}>
-                            <IoPlayCircleOutline />
+        data && (
+            <div className={cx("wrapper")}>
+                <div className={cx("image")}>
+                    <div className={cx("play-actions")}>
+                        <Link to={`/playlist/${data.encodeId}`}>
+                            <div className={cx("overlay")}></div>
+                        </Link>
+                        <div className={cx("follow")}>
+                            <MdFavoriteBorder />
                         </div>
-                    </Link>
+                        <Link to={`/playlist/${data.encodeId}`}>
+                            <div className={cx("play")}>
+                                <IoPlayCircleOutline />
+                            </div>
+                        </Link>
+                    </div>
+                    <img
+                        className={cx("thumb")}
+                        src={data.thumbnailM || data.thumbnail}
+                        alt={data.title}
+                    />
                 </div>
-                <img className={cx("thumb")} src={thumbnailM} alt={title} />
+                <div className={cx("content")}>
+                    <Link to={`/playlist/${data.encodeId}`}>
+                        <h4 className={cx("title")}>{data.title}</h4>
+                    </Link>
+                    <p className={cx("description")}>{data.sortDescription}</p>
+                </div>
             </div>
-            <div className={cx("content")}>
-                <Link to={`/playlist/${encodeId}`}>
-                    <h4 className={cx("title")}>{title}</h4>
-                </Link>
-                <p className={cx("description")}>{sortDescription}</p>
-            </div>
-        </div>
+        )
     );
 };
 

@@ -8,24 +8,30 @@ import { formatNumber } from "../../utils/formatNumber";
 
 const cx = classNames.bind(styles);
 
-function AccountItem({ data }) {
+function AccountItem({ data, disableFollow }) {
     return (
-        <Link to={`/artist/${data.alias}`} className={cx("wrapper")}>
-            <Image
-                className={cx("avatar")}
-                src={data.thumbnailM || images.noImage}
-                alt={data.name}
-            />
-            <div className={cx("info")}>
-                <h4 className={cx("name")}>
-                    <span>{data.name}</span>
-                </h4>
-                <span className={cx("follow")}>
-                    {data.totalFollow ? formatNumber(data.totalFollow) : 0}{" "}
-                    Follows
-                </span>
-            </div>
-        </Link>
+        data && (
+            <Link to={`/artist/${data.alias}`} className={cx("wrapper")}>
+                <Image
+                    className={cx("avatar")}
+                    src={data.thumbnailM || data.thumbnail || images.noImage}
+                    alt={data.name}
+                />
+                <div className={cx("info")}>
+                    <h4 className={cx("name")}>
+                        <span>{data.name}</span>
+                    </h4>
+                    {!disableFollow && (
+                        <span className={cx("follow")}>
+                            {data.totalFollow
+                                ? formatNumber(data.totalFollow)
+                                : 0}{" "}
+                            Follows
+                        </span>
+                    )}
+                </div>
+            </Link>
+        )
     );
 }
 

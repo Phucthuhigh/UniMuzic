@@ -1,0 +1,20 @@
+.wrapper {
+    padding: 35px;
+}
+.special {
+    margin-bottom: 48px;
+    .title {
+        margin: 20px;
+        font-size: 5rem;
+    }
+    .content {
+        display: flex;
+        flex-wrap: wrap;
+        .special-card {
+            margin: 20px;
+            width: 350px;
+            height: 80px;
+            border-radius: 3px;
+        }
+    }
+}

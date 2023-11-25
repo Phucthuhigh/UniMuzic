@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import classNames from "classnames/bind";
 import styles from "./Header.module.scss";
 import images from "../../../assets/images";
-import SearchBtn from "../Search";
+import SearchBar from "../SearchBar";
 import { Link } from "react-router-dom";
 import Button from "../../../components/Button";
 import Image from "../../../components/Image";
@@ -57,7 +57,7 @@ const Header = () => {
                         <span className={cx("logo-name")}>UniMuzic</span>
                     </div>
                 </Link>
-                <SearchBtn />
+                <SearchBar />
                 <div className={cx("actions")}>
                     {currentUser ? (
                         <Menu items={userMenu} trigger="click" hideOnClick>

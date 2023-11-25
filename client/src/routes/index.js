@@ -13,6 +13,7 @@ import Logout from "../pages/Logout";
 import VerifyEmail from "../pages/VerifyEmail";
 import DetailPlaylist from "../pages/DetailPlaylist";
 import DetailArtist from "../pages/DetailArtist";
+import Search from "../pages/Search";
 
 const publicRoutes = [
     {
@@ -26,14 +27,6 @@ const publicRoutes = [
     {
         path: config.routes.top100,
         component: Top100,
-    },
-    {
-        path: config.routes.favorite,
-        component: Favorite,
-    },
-    {
-        path: config.routes.history,
-        component: History,
     },
     {
         path: config.routes.login,
@@ -68,11 +61,23 @@ const publicRoutes = [
         path: config.routes.detailArtist,
         component: DetailArtist,
     },
+    {
+        path: config.routes.search,
+        component: Search,
+    },
 ];
 const privateRoutes = [
     {
         path: config.routes.dashboard,
         component: Dashboard,
+    },
+    {
+        path: config.routes.favorite,
+        component: Favorite,
+    },
+    {
+        path: config.routes.history,
+        component: History,
     },
 ];
 

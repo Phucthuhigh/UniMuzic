@@ -19,46 +19,50 @@ function SongItem({ data, duration, playlist = [], className }) {
     };
 
     return (
-        <div className={cx("wrapper", className)}>
-            <Image
-                className={cx("thumb")}
-                src={data.thumbnailM}
-                alt={data.thumbnailM}
-                onClick={handlePlayMusic}
-            />
-            <div className={cx("info")}>
-                <h4 className={cx("title")} onClick={handlePlayMusic}>
-                    <span className={cx("title-text")}>{data.title}</span>
-                    {data.streamingStatus !== 1 && (
-                        <Badge
-                            title="VIP"
-                            style={{
-                                backgroundColor: "#e5ac1a",
-                                marginLeft: 8,
-                            }}
-                        />
-                    )}
-                </h4>
-                <div className={cx("author")}>
-                    {data.artists &&
-                        data.artists.map((artist, index) => {
-                            return (
-                                <div
-                                    key={artist.id}
-                                    style={{ display: "inline-block" }}>
-                                    {index === 0 ? <></> : <span>, </span>}
-                                    <Link to={`/artist/${artist.alias}`}>
-                                        {artist.name}
-                                    </Link>
-                                </div>
-                            );
-                        })}
+        data && (
+            <div className={cx("wrapper", className)}>
+                <Image
+                    className={cx("thumb")}
+                    src={data.thumbnailM || data.thumbnail}
+                    alt={data.title}
+                    onClick={handlePlayMusic}
+                />
+                <div className={cx("info")}>
+                    <h4 className={cx("title")} onClick={handlePlayMusic}>
+                        <span className={cx("title-text")}>{data.title}</span>
+                        {data.streamingStatus !== 1 && (
+                            <Badge
+                                title="VIP"
+                                style={{
+                                    backgroundColor: "#e5ac1a",
+                                    marginLeft: 8,
+                                }}
+                            />
+                        )}
+                    </h4>
+                    <div className={cx("author")}>
+                        {data.artists &&
+                            data.artists.map((artist, index) => {
+                                return (
+                                    <div
+                                        key={artist.id}
+                                        style={{ display: "inline-block" }}>
+                                        {index === 0 ? <></> : <span>, </span>}
+                                        <Link to={`/artist/${artist.alias}`}>
+                                            {artist.name}
+                                        </Link>
+                                    </div>
+                                );
+                            })}
+                    </div>
                 </div>
+                {duration && (
+                    <span className={cx("duration")}>
+                        {formatTime(duration)}
+                    </span>
+                )}
             </div>
-            {duration && (
-                <span className={cx("duration")}>{formatTime(duration)}</span>
-            )}
-        </div>
+        )
     );
 }
 

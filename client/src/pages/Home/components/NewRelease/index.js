@@ -3,6 +3,7 @@ import styles from "./NewRelease.module.scss";
 import classNames from "classnames/bind";
 import SongItem from "../../../../components/SongItem";
 import Button from "../../../../components/Button";
+import Songs from "../../../../components/Songs";
 
 const cx = classNames.bind(styles);
 
@@ -29,17 +30,7 @@ const NewRelease = ({ title, data }) => {
                     </Button>
                 ))}
             </div>
-            <div className={cx("list")}>
-                {data[type].map((item) => (
-                    <div className={cx("item")} key={item.encodeId}>
-                        <SongItem
-                            className={cx("song-item-card")}
-                            data={item}
-                            playlist={data[type]}
-                        />
-                    </div>
-                ))}
-            </div>
+            <Songs list={data[type]} itemWidth={380} />
         </div>
     );
 };

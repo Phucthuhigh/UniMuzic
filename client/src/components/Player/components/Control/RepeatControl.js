@@ -8,8 +8,8 @@ const cx = classNames.bind(styles);
 
 const RepeatControl = ({ isRepeat, dispatch }) => {
     const handleToggleRepeat = () => {
+        localStorage.setItem("isRepeat", JSON.stringify(!isRepeat));
         dispatch({ type: SET_ISREPEAT, payload: !isRepeat });
-        localStorage.setItem("isRepeat", JSON.stringify(isRepeat));
     };
 
     return (

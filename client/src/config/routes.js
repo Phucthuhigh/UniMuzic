@@ -12,6 +12,7 @@ const routes = {
     verifyEmail: "/verify-email/:token",
     detailPlaylist: "/playlist/:id",
     detailArtist: "/artist/:name",
+    search: "/search",
 };
 
 export default routes;

@@ -194,6 +194,7 @@ const Player = () => {
                 isLyric={isLyric}
                 info={infoSongPlayer}
                 currentTime={currentTime}
+                dispatch={dispatch}
             />
         </div>
     );

@@ -7,14 +7,16 @@ const cx = classNames.bind(styles);
 
 const Playlists = ({ list, title }) => {
     return (
-        <div className={cx("wrapper")}>
-            <h1 className={cx("title")}>{title}</h1>
-            <div className={cx("list")}>
-                {list.map((item) => (
-                    <PlaylistCard key={item.encodeId} {...item} />
-                ))}
+        list && (
+            <div className={cx("wrapper")}>
+                <h1 className={cx("title")}>{title}</h1>
+                <div className={cx("list")}>
+                    {list.map((item) => (
+                        <PlaylistCard key={item.encodeId} data={item} />
+                    ))}
+                </div>
             </div>
-        </div>
+        )
     );
 };
 

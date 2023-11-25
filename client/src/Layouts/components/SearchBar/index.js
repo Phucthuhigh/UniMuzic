@@ -1,6 +1,6 @@
 import classNames from "classnames/bind";
 import React, { useEffect, useRef, useState } from "react";
-import styles from "./Search.module.scss";
+import styles from "./SearchBar.module.scss";
 import { SearchIcon, SmallCloseIcon } from "@chakra-ui/icons";
 import HeadlessTippy from "@tippyjs/react/headless";
 import PopperWrapper from "../../../components/Popper";
@@ -13,7 +13,7 @@ import { useNavigate } from "react-router-dom";
 
 const cx = classNames.bind(styles);
 
-const SearchBtn = () => {
+const SearchBar = () => {
     const [input, setInput] = useState("");
     const [searchResult, setSearchResult] = useState({});
     const [showResult, setShowResult] = useState(true);
@@ -138,4 +138,4 @@ const SearchBtn = () => {
     );
 };
 
-export default SearchBtn;
+export default SearchBar;

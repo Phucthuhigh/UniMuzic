@@ -1,0 +1,13 @@
+.more-artist {
+    margin-bottom: 48px;
+    & .list {
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 20px;
+    }
+}
+
+.title {
+    margin: 20px;
+    font-size: 5rem;
+}

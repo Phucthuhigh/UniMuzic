@@ -7,27 +7,32 @@ import { Link } from "react-router-dom";
 
 const cx = classNames.bind(styles);
 
-const AccountCard = ({ data, className }) => {
-    console.log(data);
+const AccountCard = ({ data, disableFollow, className }) => {
     return (
-        <div className={cx("wrapper", className)}>
-            <Link to={`/artist/${data.alias}`}>
-                <Image
-                    className={cx("avatar")}
-                    src={data.thumbnailM}
-                    alt={data.name}
-                />
-            </Link>
-            <div className={cx("info")}>
-                <Link className={cx("name")} to={`/artist/${data.alias}`}>
-                    <h3>{data.name}</h3>
+        data && (
+            <div className={cx("wrapper", className)}>
+                <Link to={`/artist/${data.alias}`}>
+                    <Image
+                        className={cx("avatar")}
+                        src={data.thumbnailM || data.thumbnail}
+                        alt={data.name}
+                    />
                 </Link>
-                <span className={cx("follow")}>
-                    {data.totalFollow ? formatNumber(data.totalFollow) : 0} quan
-                    tâm
-                </span>
+                <div className={cx("info")}>
+                    <Link className={cx("name")} to={`/artist/${data.alias}`}>
+                        <h3>{data.name}</h3>
+                    </Link>
+                    {!disableFollow && (
+                        <span className={cx("follow")}>
+                            {data.totalFollow
+                                ? formatNumber(data.totalFollow)
+                                : 0}{" "}
+                            quan tâm
+                        </span>
+                    )}
+                </div>
             </div>
-        </div>
+        )
     );
 };
 

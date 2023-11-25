@@ -28,6 +28,21 @@
     margin-top: 50px;
     display: flex;
     justify-content: center;
+    position: relative;
+}
+
+.turnoff {
+    position: absolute;
+    color: rgb(255, 255, 255, 0.5);
+    font-size: 4rem;
+    left: 50%;
+    transform: translateX(-50%);
+    top: -40px;
+    cursor: pointer;
+    transition: color 0.2s ease;
+    &:hover {
+        color: var(--white);
+    }
 }
 
 .image-song {
@@ -40,11 +55,22 @@
 .lyrics {
     width: 800px;
     height: 500px;
+    padding: 22px 0;
     overflow-y: auto;
+    position: relative;
+    -webkit-mask-image: linear-gradient(
+        180deg,
+        hsla(0, 0%, 100%, 0),
+        hsla(0, 0%, 100%, 0.8) 10%,
+        #fff 25%,
+        #fff 75%,
+        hsla(0, 0%, 100%, 0.8) 90%,
+        hsla(0, 0%, 100%, 0)
+    );
 }
 
 .line {
-    margin-bottom: 12px;
+    margin-bottom: 20px;
     .line-text {
         font-size: 4rem;
         font-weight: 700;
