@@ -45,6 +45,8 @@ const SongContextProvider = ({ children }) => {
                             currentIndexPlaylist: playlist.findIndex(
                                 (item) => item.encodeId === musicId
                             ),
+                            isFailed: false,
+                            messageFailed: "",
                         },
                     });
                 } else {
