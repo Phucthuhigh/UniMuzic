@@ -195,6 +195,7 @@ const Player = () => {
                 info={infoSongPlayer}
                 currentTime={currentTime}
                 dispatch={dispatch}
+                auRef={auRef.current}
             />
         </div>
     );

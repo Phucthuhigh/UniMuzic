@@ -105,7 +105,7 @@ const Login = () => {
                         />
                         <Input value="Log in" type="submit" />
                         <div className={cx("links")}>
-                            <Link className="link" to="/forgetpassword">
+                            <Link className="link" to="/forget-password">
                                 Quên mật khẩu?
                             </Link>
                             <Link to="/signup">Đăng ký</Link>

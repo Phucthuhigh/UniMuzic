@@ -38,13 +38,17 @@ const Search = () => {
             <div className={cx("special")}>
                 <h1 className={cx("title")}>Nổi bật</h1>
                 <div className={cx("content")}>
-                    {searchResult.top.objectType === "song" ? (
-                        <SongItem data={searchResult.top} />
-                    ) : searchResult.top.objectType === "artist" ? (
-                        <AccountCard data={searchResult.top} disableFollow />
-                    ) : (
-                        <PlaylistCard data={searchResult.top} />
-                    )}
+                    {searchResult.top &&
+                        (searchResult.top.objectType === "song" ? (
+                            <SongItem data={searchResult.top} />
+                        ) : searchResult.top.objectType === "artist" ? (
+                            <AccountCard
+                                data={searchResult.top}
+                                disableFollow
+                            />
+                        ) : (
+                            <PlaylistCard data={searchResult.top} />
+                        ))}
                 </div>
             </div>
             <Songs

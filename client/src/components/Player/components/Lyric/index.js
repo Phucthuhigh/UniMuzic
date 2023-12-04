@@ -4,11 +4,11 @@ import styles from "./Lyric.module.scss";
 import Image from "../../../Image";
 import { useLyric } from "../../../../hooks";
 import { IoIosArrowDown } from "react-icons/io";
-import { SET_ISLYRIC } from "../../../../reducers/constants";
+import { SET_ISLYRIC, SET_CURRENTTIME } from "../../../../reducers/constants";
 
 const cx = classNames.bind(styles);
 
-const Lyric = ({ isLyric, info, currentTime, dispatch }) => {
+const Lyric = ({ isLyric, info, currentTime, dispatch, duration, auRef }) => {
     const lyric = useLyric(info.encodeId);
 
     return (
@@ -45,7 +45,17 @@ const Lyric = ({ isLyric, info, currentTime, dispatch }) => {
                                 <div
                                     id={`line-${index}`}
                                     key={index}
-                                    className={cx("line")}>
+                                    className={cx("line")}
+                                    onClick={() => {
+                                        if (auRef) {
+                                            dispatch({
+                                                type: SET_CURRENTTIME,
+                                                payload: item.startTime / 1000,
+                                            });
+                                            auRef.currentTime =
+                                                item.startTime / 1000;
+                                        }
+                                    }}>
                                     <span
                                         className={cx("line-text", {
                                             [styles.active]:

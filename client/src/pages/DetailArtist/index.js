@@ -7,10 +7,8 @@ import { SongContext } from "../../contexts";
 import { getDetailArtist } from "../../services/getDetailArtist";
 import Spinner from "../../components/Spinner";
 import { formatNumber } from "../../utils/formatNumber";
-import SongItem from "../../components/SongItem";
 import Playlists from "../../components/Playlists";
 import { FaPlay } from "react-icons/fa";
-import AccountCard from "../../components/AccountCard";
 import Songs from "../../components/Songs";
 import Artists from "../../components/Artists";
 

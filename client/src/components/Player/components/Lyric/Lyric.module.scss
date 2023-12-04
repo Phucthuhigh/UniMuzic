@@ -71,6 +71,10 @@
 
 .line {
     margin-bottom: 20px;
+    cursor: pointer;
+    &:hover > .line-text {
+        color: var(--white);
+    }
     .line-text {
         font-size: 4rem;
         font-weight: 700;
